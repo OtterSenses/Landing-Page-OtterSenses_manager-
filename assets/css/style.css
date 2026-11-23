@@ -38,6 +38,11 @@ body { font-family: var(--bs-body-font-family); color: var(--os-text); }
   -webkit-background-clip: text; background-clip: text; color: transparent;
 }
 .narrow { max-width: 820px; }
+.document-content { overflow-wrap: anywhere; }
+.document-content h2 { font-size: 1.75rem; }
+.document-content h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem; }
+.document-content section { margin-top: 2rem; }
+.document-content li { margin-bottom: .5rem; }
 
 .btn-accent {
   --bs-btn-color: #04211D;
