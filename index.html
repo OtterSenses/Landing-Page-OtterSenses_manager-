@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>OtterSenses Manager — Monitoramento industrial de tanques em tempo real</title>
+  <meta name="description" content="Plataforma B2B para monitoramento de tanques industriais com sensores ESP32: leituras em tempo real, central de alertas, manutenções, tarefas e relatórios em um só lugar.">
+  <meta name="theme-color" content="#0B1F2E">
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="OtterSenses Manager">
+  <meta property="og:description" content="Monitoramento industrial de tanques com sensores ESP32, alertas e gestão de manutenção.">
+  <meta property="og:type" content="website">
+
+  <link rel="icon" type="image/svg+xml" href="assets/img/logo.svg">
+
+  <!-- Fonte -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
+  <!-- Bootstrap 5 + ícones (mesma base de UI do sistema) -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
+
+  <link rel="stylesheet" href="assets/css/style.css">
+</head>
+<body data-bs-spy="scroll" data-bs-target="#navbar" data-bs-offset="90" tabindex="0">
+
+  <a class="visually-hidden-focusable skip-link" href="#conteudo">Pular para o conteúdo</a>
+
+  <!-- ============ NAVBAR ============ -->
+  <nav id="navbar" class="navbar navbar-expand-lg navbar-dark fixed-top">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="#inicio">
+        <img src="assets/img/logo.svg" alt="" width="36" height="36">
+        <span class="fw-bold">Otter<span class="text-accent">Senses</span></span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu"
+              aria-controls="menu" aria-expanded="false" aria-label="Abrir menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="menu">
+        <ul class="navbar-nav ms-auto align-items-lg-center gap-lg-2">
+          <li class="nav-item"><a class="nav-link" href="#solucao">Solução</a></li>
+          <li class="nav-item"><a class="nav-link" href="#recursos">Recursos</a></li>
+          <li class="nav-item"><a class="nav-link" href="#como-funciona">Como funciona</a></li>
+          <li class="nav-item"><a class="nav-link" href="#planos">Planos</a></li>
+          <li class="nav-item"><a class="nav-link" href="#academy">Academy</a></li>
+          <li class="nav-item"><a class="nav-link" href="#faq">FAQ</a></li>
+          <li class="nav-item ms-lg-2"><a class="btn btn-accent btn-sm px-3" href="#contato">Solicitar demonstração</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main id="conteudo">
+
+    <!-- ============ HERO ============ -->
+    <header id="inicio" class="hero">
+      <div class="container">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-6" data-reveal>
+            <span class="badge-pill"><i class="bi bi-broadcast"></i> Monitoramento IoT com ESP32</span>
+            <h1 class="display-5 fw-bold mt-3">
+              Seus tanques industriais<br>
+              <span class="text-gradient">sob controle, em tempo real.</span>
+            </h1>
+            <p class="lead text-light-muted mt-3">
+              O OtterSenses Manager conecta sensores ESP32 a uma plataforma web que mostra o nível e
+              o estado de cada tanque, dispara alertas na hora certa e organiza a manutenção da sua equipe.
+            </p>
+            <div class="d-flex flex-wrap gap-3 mt-4">
+              <a href="#contato" class="btn btn-accent btn-lg px-4">Solicitar demonstração</a>
+              <a href="#como-funciona" class="btn btn-outline-light btn-lg px-4">Ver como funciona</a>
+            </div>
+            <ul class="hero-checks list-unstyled d-flex flex-wrap gap-4 mt-4 mb-0">
+              <li><i class="bi bi-check2-circle"></i> Acesso pelo navegador</li>
+              <li><i class="bi bi-check2-circle"></i> Multiempresa</li>
+              <li><i class="bi bi-check2-circle"></i> Permissões por papel</li>
+            </ul>
+          </div>
+
+          <!-- Mock do painel (dados ilustrativos) -->
+          <div class="col-lg-6" data-reveal>
+            <div class="dashboard-mock" aria-label="Ilustração do painel de monitoramento">
+              <div class="mock-top">
+                <span class="dot bg-danger"></span><span class="dot bg-warning"></span><span class="dot bg-success"></span>
+                <span class="mock-title">Painel · Unidade Norte</span>
+                <span class="live"><span class="live-dot"></span> ao vivo</span>
+              </div>
+              <div class="mock-body">
+                <div class="row g-3">
+                  <div class="col-4">
+                    <div class="tank-card">
+                      <div class="tank"><div class="tank-fill" data-level="72"></div></div>
+                      <div class="tank-info"><strong>TQ-01</strong><span class="tank-value">72%</span></div>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="tank-card">
+                      <div class="tank"><div class="tank-fill" data-level="38"></div></div>
+                      <div class="tank-info"><strong>TQ-02</strong><span class="tank-value">38%</span></div>
+                    </div>
+                  </div>
+                  <div class="col-4">
+                    <div class="tank-card warn">
+                      <div class="tank"><div class="tank-fill" data-level="12"></div></div>
+                      <div class="tank-info"><strong>TQ-03</strong><span class="tank-value">12%</span></div>
+                    </div>
+                  </div>
+                </div>
+                <div class="mock-alert mt-3">
+                  <i class="bi bi-exclamation-triangle-fill"></i>
+                  <div>
+                    <strong>Nível baixo no TQ-03</strong>
+                    <small class="d-block">Alerta enviado ao técnico responsável · agora</small>
+                  </div>
+                </div>
+                <div class="mock-rows mt-3">
+                  <div><i class="bi bi-wrench-adjustable"></i> Manutenção preventiva · Bomba B2 <span class="tag">amanhã</span></div>
+                  <div><i class="bi bi-kanban"></i> 3 tarefas em andamento <span class="tag tag-ok">no prazo</span></div>
+                </div>
+              </div>
+            </div>
+            <p class="mock-caption">Imagem ilustrativa do painel.</p>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- ============ PROBLEMA / SOLUÇÃO ============ -->
+    <section id="solucao" class="section">
+      <div class="container">
+        <div class="section-head text-center" data-reveal>
+          <span class="eyebrow">Por que OtterSenses</span>
+          <h2>Pare de descobrir o problema quando ele já virou prejuízo</h2>
+          <p>Conferência manual, planilhas e recados soltos deixam a operação sempre um passo atrás.
+             A plataforma reúne leitura, alerta e ação em um só fluxo.</p>
+        </div>
+
+        <div class="row g-4 mt-2">
+          <div class="col-md-6" data-reveal>
+            <div class="compare-card compare-bad h-100">
+              <h3><i class="bi bi-x-circle"></i> Sem monitoramento</h3>
+              <ul>
+                <li>Rondas manuais para conferir nível de cada tanque</li>
+                <li>Falta ou transbordo percebidos tarde demais</li>
+                <li>Manutenções controladas em planilhas e papel</li>
+                <li>Ninguém sabe quem ficou responsável por cada ocorrência</li>
+              </ul>
+            </div>
+          </div>
+          <div class="col-md-6" data-reveal>
+            <div class="compare-card compare-good h-100">
+              <h3><i class="bi bi-check-circle"></i> Com OtterSenses Manager</h3>
+              <ul>
+                <li>Leituras dos sensores ESP32 visíveis no painel em tempo real</li>
+                <li>Alertas automáticos para a pessoa certa</li>
+                <li>Agenda de manutenção e histórico por equipamento</li>
+                <li>Tarefas em kanban, com responsável e prazo</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ RECURSOS ============ -->
+    <section id="recursos" class="section section-alt">
+      <div class="container">
+        <div class="section-head text-center" data-reveal>
+          <span class="eyebrow">Recursos</span>
+          <h2>Tudo o que a operação precisa, em uma plataforma</h2>
+          <p>Do sensor no tanque ao relatório para a gestão.</p>
+        </div>
+
+        <div class="row g-4 mt-2">
+          <div class="col-md-6 col-lg-4" data-reveal>
+            <div class="feature-card">
+              <div class="feature-icon"><i class="bi bi-speedometer2"></i></div>
+              <h3>Monitoramento de tanques</h3>
+              <p>Nível e estado de cada tanque e equipamento, com leituras enviadas pelos sensores ESP32.</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4" data-reveal>
+            <div class="feature-card">
+              <div class="feature-icon"><i class="bi bi-bell"></i></div>
+              <h3>Central de alertas</h3>
+              <p>Regras de alerta por tanque, com histórico de ocorrências e de quem atendeu cada uma.</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4" data-reveal>
+            <div class="feature-card">
+              <div class="feature-icon"><i class="bi bi-tools"></i></div>
+              <h3>Manutenções</h3>
+              <p>Preventivas e corretivas organizadas por equipamento, com agenda e histórico.</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4" data-reveal>
+            <div class="feature-card">
+              <div class="feature-icon"><i class="bi bi-kanban"></i></div>
+              <h3>Kanban de tarefas</h3>
+              <p>Distribua o trabalho da equipe e acompanhe o andamento de cada atividade.</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4" data-reveal>
+            <div class="feature-card">
+              <div class="feature-icon"><i class="bi bi-folder2-open"></i></div>
+              <h3>Documentos</h3>
+              <p>Manuais, laudos e procedimentos guardados junto ao equipamento a que pertencem.</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4" data-reveal>
+            <div class="feature-card">
+              <div class="feature-icon"><i class="bi bi-graph-up-arrow"></i></div>
+              <h3>Relatórios</h3>
+              <p>Visão consolidada da operação para apoiar decisões da gestão.</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4" data-reveal>
+            <div class="feature-card">
+              <div class="feature-icon"><i class="bi bi-buildings"></i></div>
+              <h3>Empresas e colaboradores</h3>
+              <p>Cadastre empresas clientes, unidades e colaboradores, com dados isolados por empresa.</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4" data-reveal>
+            <div class="feature-card">
+              <div class="feature-icon"><i class="bi bi-shield-lock"></i></div>
+              <h3>Papéis e permissões</h3>
+              <p>Administrador, Gestor, Técnico e Operador: cada um vê e faz só o que lhe cabe.</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4" data-reveal>
+            <div class="feature-card">
+              <div class="feature-icon"><i class="bi bi-mortarboard"></i></div>
+              <h3>Academy</h3>
+              <p>Área de cursos para capacitar equipes e profissionais independentes.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ COMO FUNCIONA ============ -->
+    <section id="como-funciona" class="section">
+      <div class="container">
+        <div class="section-head text-center" data-reveal>
+          <span class="eyebrow">Como funciona</span>
+          <h2>Do sensor ao painel em quatro passos</h2>
+        </div>
+
+        <div class="row g-4 mt-2 steps">
+          <div class="col-md-6 col-lg-3" data-reveal>
+            <div class="step">
+              <span class="step-num">1</span>
+              <i class="bi bi-cpu step-icon"></i>
+              <h3>Sensor no tanque</h3>
+              <p>Um ESP32 com sensor é instalado em cada tanque e mede o nível continuamente.</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3" data-reveal>
+            <div class="step">
+              <span class="step-num">2</span>
+              <i class="bi bi-cloud-arrow-up step-icon"></i>
+              <h3>Envio para a nuvem</h3>
+              <p>As leituras são enviadas pela rede Wi-Fi para a plataforma, de forma segura.</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3" data-reveal>
+            <div class="step">
+              <span class="step-num">3</span>
+              <i class="bi bi-display step-icon"></i>
+              <h3>Painel e alertas</h3>
+              <p>A equipe acompanha tudo pelo navegador e recebe alertas quando algo sai do normal.</p>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-3" data-reveal>
+            <div class="step">
+              <span class="step-num">4</span>
+              <i class="bi bi-person-gear step-icon"></i>
+              <h3>Ação da equipe</h3>
+              <p>O alerta vira tarefa ou manutenção, com responsável, prazo e histórico.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PARA QUEM ============ -->
+    <section id="perfis" class="section section-alt">
+      <div class="container">
+        <div class="section-head text-center" data-reveal>
+          <span class="eyebrow">Para cada papel</span>
+          <h2>Cada pessoa vê o que precisa para trabalhar</h2>
+        </div>
+
+        <ul class="nav nav-pills justify-content-center role-tabs mt-2" role="tablist" data-reveal>
+          <li class="nav-item" role="presentation"><button class="nav-link active" data-bs-toggle="pill" data-bs-target="#papel-admin" type="button" role="tab">Administrador</button></li>
+          <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#papel-gestor" type="button" role="tab">Gestor</button></li>
+          <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#papel-tecnico" type="button" role="tab">Técnico</button></li>
+          <li class="nav-item" role="presentation"><button class="nav-link" data-bs-toggle="pill" data-bs-target="#papel-operador" type="button" role="tab">Operador</button></li>
+        </ul>
+
+        <div class="tab-content role-content mt-4" data-reveal>
+          <div class="tab-pane fade show active" id="papel-admin" role="tabpanel">
+            <div class="row align-items-center g-4">
+              <div class="col-md-2 text-center"><i class="bi bi-person-badge role-icon"></i></div>
+              <div class="col-md-10">
+                <h3>Administrador</h3>
+                <p>Configura a empresa, as unidades e os colaboradores, define papéis e permissões e acompanha o plano contratado.</p>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="papel-gestor" role="tabpanel">
+            <div class="row align-items-center g-4">
+              <div class="col-md-2 text-center"><i class="bi bi-clipboard-data role-icon"></i></div>
+              <div class="col-md-10">
+                <h3>Gestor</h3>
+                <p>Tem a visão geral dos tanques e alertas, distribui tarefas e acompanha relatórios e o andamento das manutenções.</p>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="papel-tecnico" role="tabpanel">
+            <div class="row align-items-center g-4">
+              <div class="col-md-2 text-center"><i class="bi bi-wrench role-icon"></i></div>
+              <div class="col-md-10">
+                <h3>Técnico</h3>
+                <p>Recebe os alertas e as manutenções atribuídas a ele, registra o que foi feito e consulta documentos dos equipamentos.</p>
+              </div>
+            </div>
+          </div>
+          <div class="tab-pane fade" id="papel-operador" role="tabpanel">
+            <div class="row align-items-center g-4">
+              <div class="col-md-2 text-center"><i class="bi bi-person-workspace role-icon"></i></div>
+              <div class="col-md-10">
+                <h3>Operador</h3>
+                <p>Acompanha as leituras dos tanques da sua área no dia a dia e executa as tarefas do kanban.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ PLANOS ============ -->
+    <section id="planos" class="section">
+      <div class="container">
+        <div class="section-head text-center" data-reveal>
+          <span class="eyebrow">Planos</span>
+          <h2>Escolha o plano do tamanho da sua operação</h2>
+          <p>Os módulos liberados variam conforme o plano. Fale com a gente para montar a proposta.</p>
+        </div>
+
+        <div class="row g-4 mt-2 justify-content-center">
+          <div class="col-md-6 col-lg-4" data-reveal>
+            <div class="plan-card h-100">
+              <h3>Essencial</h3>
+              <p class="plan-desc">Para começar a monitorar os primeiros tanques.</p>
+              <div class="plan-price">Sob consulta</div>
+              <ul>
+                <li><i class="bi bi-check2"></i> Monitoramento de tanques</li>
+                <li><i class="bi bi-check2"></i> Central de alertas</li>
+                <li><i class="bi bi-check2"></i> Colaboradores e permissões</li>
+              </ul>
+              <a href="#contato" class="btn btn-outline-primary w-100 mt-auto" data-plan="Essencial">Quero este plano</a>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4" data-reveal>
+            <div class="plan-card plan-featured h-100">
+              <span class="plan-badge">Mais completo para equipes</span>
+              <h3>Profissional</h3>
+              <p class="plan-desc">Para operações com equipe de manutenção.</p>
+              <div class="plan-price">Sob consulta</div>
+              <ul>
+                <li><i class="bi bi-check2"></i> Tudo do Essencial</li>
+                <li><i class="bi bi-check2"></i> Manutenções e kanban</li>
+                <li><i class="bi bi-check2"></i> Documentos por equipamento</li>
+                <li><i class="bi bi-check2"></i> Relatórios</li>
+              </ul>
+              <a href="#contato" class="btn btn-accent w-100 mt-auto" data-plan="Profissional">Quero este plano</a>
+            </div>
+          </div>
+          <div class="col-md-6 col-lg-4" data-reveal>
+            <div class="plan-card h-100">
+              <h3>Empresarial</h3>
+              <p class="plan-desc">Para várias unidades e grandes volumes.</p>
+              <div class="plan-price">Sob consulta</div>
+              <ul>
+                <li><i class="bi bi-check2"></i> Tudo do Profissional</li>
+                <li><i class="bi bi-check2"></i> Múltiplas unidades</li>
+                <li><i class="bi bi-check2"></i> Academy para a equipe</li>
+                <li><i class="bi bi-check2"></i> Suporte dedicado</li>
+              </ul>
+              <a href="#contato" class="btn btn-outline-primary w-100 mt-auto" data-plan="Empresarial">Quero este plano</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ ACADEMY ============ -->
+    <section id="academy" class="section academy">
+      <div class="container">
+        <div class="row align-items-center g-5">
+          <div class="col-lg-6" data-reveal>
+            <span class="eyebrow eyebrow-light">OtterSenses Academy</span>
+            <h2 class="text-white">Capacitação para quem opera e mantém</h2>
+            <p class="text-light-muted">
+              Uma área de cursos dentro da plataforma, aberta também para profissionais independentes,
+              sem vínculo com uma empresa cliente.
+            </p>
+            <a href="#contato" class="btn btn-accent mt-2">Quero saber mais</a>
+          </div>
+          <div class="col-lg-6" data-reveal>
+            <div class="row g-3">
+              <div class="col-sm-6"><div class="academy-item"><i class="bi bi-play-circle"></i> Cursos em vídeo</div></div>
+              <div class="col-sm-6"><div class="academy-item"><i class="bi bi-journal-check"></i> Trilhas por tema</div></div>
+              <div class="col-sm-6"><div class="academy-item"><i class="bi bi-people"></i> Para equipes e autônomos</div></div>
+              <div class="col-sm-6"><div class="academy-item"><i class="bi bi-laptop"></i> 100% no navegador</div></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ FAQ ============ -->
+    <section id="faq" class="section">
+      <div class="container narrow">
+        <div class="section-head text-center" data-reveal>
+          <span class="eyebrow">Dúvidas frequentes</span>
+          <h2>Perguntas frequentes</h2>
+        </div>
+
+        <div class="accordion faq mt-2" id="faqAccordion" data-reveal>
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#faq1" aria-expanded="true">
+                Preciso instalar algum programa?
+              </button>
+            </h3>
+            <div id="faq1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">Não. A plataforma é acessada pelo navegador, no computador ou no celular.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq2">
+                Como os dados dos tanques chegam à plataforma?
+              </button>
+            </h3>
+            <div id="faq2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">Cada tanque recebe um sensor ligado a um ESP32, que envia as leituras pela rede Wi-Fi para a plataforma.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq3">
+                Os dados da minha empresa ficam separados dos de outras empresas?
+              </button>
+            </h3>
+            <div id="faq3" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">Sim. Cada empresa só acessa os próprios dados, e as permissões são verificadas no servidor a cada acesso.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq4">
+                Posso controlar o que cada colaborador acessa?
+              </button>
+            </h3>
+            <div id="faq4" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">Sim. Cada colaborador recebe um papel (Administrador, Gestor, Técnico ou Operador) que define o que ele vê e pode fazer.</div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <h3 class="accordion-header">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#faq5">
+                Sou profissional autônomo. Posso usar a Academy?
+              </button>
+            </h3>
+            <div id="faq5" class="accordion-collapse collapse" data-bs-parent="#faqAccordion">
+              <div class="accordion-body">Sim. A Academy aceita usuários independentes, sem vínculo com uma empresa cliente.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ============ CONTATO / CTA ============ -->
+    <section id="contato" class="section section-alt">
+      <div class="container">
+        <div class="row g-5 align-items-center">
+          <div class="col-lg-5" data-reveal>
+            <span class="eyebrow">Fale com a gente</span>
+            <h2>Solicite uma demonstração</h2>
+            <p>Conte um pouco sobre a sua operação e mostramos como o OtterSenses Manager se encaixa nela.</p>
+            <ul class="list-unstyled contact-points mt-4">
+              <li><i class="bi bi-calendar-check"></i> Demonstração guiada da plataforma</li>
+              <li><i class="bi bi-diagram-3"></i> Proposta de acordo com o número de tanques</li>
+              <li><i class="bi bi-chat-dots"></i> Tire dúvidas sobre instalação dos sensores</li>
+            </ul>
+          </div>
+          <div class="col-lg-7" data-reveal>
+            <form id="contactForm" class="contact-form needs-validation" novalidate>
+              <div class="row g-3">
+                <div class="col-md-6">
+                  <label for="nome" class="form-label">Nome</label>
+                  <input type="text" class="form-control" id="nome" name="nome" autocomplete="name" required>
+                  <div class="invalid-feedback">Informe seu nome.</div>
+                </div>
+                <div class="col-md-6">
+                  <label for="empresa" class="form-label">Empresa</label>
+                  <input type="text" class="form-control" id="empresa" name="empresa" autocomplete="organization" required>
+                  <div class="invalid-feedback">Informe a empresa.</div>
+                </div>
+                <div class="col-md-6">
+                  <label for="email" class="form-label">E-mail corporativo</label>
+                  <input type="email" class="form-control" id="email" name="email" autocomplete="email" required>
+                  <div class="invalid-feedback">Informe um e-mail válido.</div>
+                </div>
+                <div class="col-md-6">
+                  <label for="telefone" class="form-label">Telefone <span class="text-muted">(opcional)</span></label>
+                  <input type="tel" class="form-control" id="telefone" name="telefone" autocomplete="tel" placeholder="(11) 90000-0000">
+                </div>
+                <div class="col-md-6">
+                  <label for="tanques" class="form-label">Quantidade de tanques</label>
+                  <select class="form-select" id="tanques" name="tanques" required>
+                    <option value="" selected disabled>Selecione</option>
+                    <option>Até 5</option>
+                    <option>6 a 20</option>
+                    <option>21 a 50</option>
+                    <option>Mais de 50</option>
+                  </select>
+                  <div class="invalid-feedback">Selecione uma opção.</div>
+                </div>
+                <div class="col-md-6">
+                  <label for="plano" class="form-label">Plano de interesse</label>
+                  <select class="form-select" id="plano" name="plano">
+                    <option value="">Ainda não sei</option>
+                    <option>Essencial</option>
+                    <option>Profissional</option>
+                    <option>Empresarial</option>
+                  </select>
+                </div>
+                <div class="col-12">
+                  <label for="mensagem" class="form-label">Mensagem <span class="text-muted">(opcional)</span></label>
+                  <textarea class="form-control" id="mensagem" name="mensagem" rows="3"></textarea>
+                </div>
+                <div class="col-12">
+                  <div class="form-check">
+                    <input class="form-check-input" type="checkbox" id="lgpd" name="lgpd" required>
+                    <label class="form-check-label" for="lgpd">
+                      Concordo que meus dados sejam usados para contato sobre o OtterSenses Manager.
+                    </label>
+                    <div class="invalid-feedback">É preciso concordar para enviar.</div>
+                  </div>
+                </div>
+                <div class="col-12">
+                  <button type="submit" class="btn btn-accent btn-lg w-100">Enviar solicitação</button>
+                </div>
+              </div>
+              <div id="formSuccess" class="alert alert-success mt-3 d-none" role="status">
+                <i class="bi bi-check-circle-fill"></i> Recebemos sua solicitação! Em breve entraremos em contato.
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ============ FOOTER ============ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <a class="d-flex align-items-center gap-2 text-white text-decoration-none mb-3" href="#inicio">
+            <img src="assets/img/logo.svg" alt="" width="32" height="32">
+            <span class="fw-bold fs-5">Otter<span class="text-accent">Senses</span></span>
+          </a>
+          <p class="text-light-muted small">Monitoramento industrial de tanques com sensores ESP32, alertas e gestão de manutenção.</p>
+        </div>
+        <div class="col-6 col-lg-2 offset-lg-2">
+          <h4>Produto</h4>
+          <ul class="list-unstyled">
+            <li><a href="#recursos">Recursos</a></li>
+            <li><a href="#como-funciona">Como funciona</a></li>
+            <li><a href="#planos">Planos</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-lg-2">
+          <h4>Conteúdo</h4>
+          <ul class="list-unstyled">
+            <li><a href="#academy">Academy</a></li>
+            <li><a href="#faq">FAQ</a></li>
+          </ul>
+        </div>
+        <div class="col-6 col-lg-2">
+          <h4>Contato</h4>
+          <ul class="list-unstyled">
+            <li><a href="#contato">Demonstração</a></li>
+            <li><a href="https://github.com/OtterSenses" target="_blank" rel="noopener">GitHub</a></li>
+          </ul>
+        </div>
+      </div>
+      <hr>
+      <div class="d-flex flex-column flex-md-row justify-content-between small text-light-muted">
+        <span>&copy; <span id="ano"></span> OtterSenses. Todos os direitos reservados.</span>
+        <a href="#inicio" class="back-top"><i class="bi bi-arrow-up"></i> Voltar ao topo</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  <script src="assets/js/main.js"></script>
+</body>
+</html>
