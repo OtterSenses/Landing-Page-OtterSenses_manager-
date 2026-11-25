@@ -69,3 +69,6 @@
   .tank { height: 90px; }
   .contact-form, .role-content, .compare-card { padding: 1.5rem; }
 }
+
+/* logo da navbar: emblema sobre fundo branco circular para contraste com o fundo escuro */
+.navbar-logo { width: 40px; height: 40px; border-radius: 50%; background: #fff; object-fit: cover; }
