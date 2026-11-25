@@ -1,0 +1,86 @@
+/* =========================================================
+   OtterSenses Manager — Landing Page
+   Base: Bootstrap 5.3 + estilos próprios
+   ========================================================= */
+
+:root {
+  --os-navy: #0B1F2E;
+  --os-navy-2: #12304A;
+  --os-teal: #14B8A6;
+  --os-teal-dark: #0E8F81;
+  --os-amber: #F5B841;
+  --os-red: #EF5350;
+  --os-text: #1E2B37;
+  --os-muted: #5D6B78;
+  --os-light: #F4F8FA;
+  --os-border: #E2E9EE;
+  --os-radius: 16px;
+
+  --bs-primary: var(--os-teal-dark);
+  --bs-primary-rgb: 14, 143, 129;
+  --bs-body-font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+  --bs-body-color: var(--os-text);
+}
+
+html { scroll-behavior: smooth; }
+body { font-family: var(--bs-body-font-family); color: var(--os-text); }
+
+.skip-link {
+  position: absolute; top: 8px; left: 8px; z-index: 2000;
+  background: #fff; padding: 8px 12px; border-radius: 8px;
+}
+
+/* ---------- utilitários ---------- */
+.text-accent { color: var(--os-teal); }
+.text-light-muted { color: #A9BCCB !important; }
+.text-gradient {
+  background: linear-gradient(90deg, var(--os-teal), #5EEAD4 60%, var(--os-amber));
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.narrow { max-width: 820px; }
+.document-content { overflow-wrap: anywhere; }
+.document-content h2 { font-size: 1.75rem; }
+.document-content h3 { font-size: 1.25rem; font-weight: 700; margin-bottom: 1rem; }
+.document-content section { margin-top: 2rem; }
+.document-content li { margin-bottom: .5rem; }
+
+.btn-accent {
+  --bs-btn-color: #04211D;
+  --bs-btn-bg: var(--os-teal);
+  --bs-btn-border-color: var(--os-teal);
+  --bs-btn-hover-color: #04211D;
+  --bs-btn-hover-bg: #2DD4BF;
+  --bs-btn-hover-border-color: #2DD4BF;
+  --bs-btn-active-bg: var(--os-teal-dark);
+  --bs-btn-active-border-color: var(--os-teal-dark);
+  font-weight: 600;
+}
+.btn-outline-primary {
+  --bs-btn-color: var(--os-teal-dark);
+  --bs-btn-border-color: var(--os-teal-dark);
+  --bs-btn-hover-bg: var(--os-teal-dark);
+  --bs-btn-hover-border-color: var(--os-teal-dark);
+  --bs-btn-active-bg: var(--os-teal-dark);
+  font-weight: 600;
+}
+
+/* ---------- animação de entrada ---------- */
+.js [data-reveal] { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+.js [data-reveal].revealed { opacity: 1; transform: none; }
+
+@media (prefers-reduced-motion: reduce) {
+  html { scroll-behavior: auto; }
+  [data-reveal] { opacity: 1; transform: none; transition: none; }
+  .tank-fill, .tank-fill::before, .live-dot, .highlight-pulse { animation: none; transition: none; }
+  .back-top-btn { transition: none; }
+}
+
+/* ---------- acessibilidade ---------- */
+section[id], header[id] { scroll-margin-top: 72px; }
+:focus-visible { outline: 3px solid var(--os-teal); outline-offset: 2px; }
+.navbar .nav-link.active { position: relative; }
+.navbar .nav-link.active::after {
+  content: ""; position: absolute; left: .5rem; right: .5rem; bottom: .2rem;
+  height: 2px; background: var(--os-teal); border-radius: 2px;
+}
+@media (max-width: 991.98px) { .navbar .nav-link.active::after { display: none; } }

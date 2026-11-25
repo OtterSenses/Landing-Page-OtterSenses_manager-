@@ -1,0 +1,15 @@
+{
+  "name": "landing-page-ottersenses-manager",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Landing page do OtterSenses Manager (HTML, Bootstrap 5 e JavaScript puro).",
+  "type": "module",
+  "license": "MIT",
+  "engines": { "node": ">=20" },
+  "scripts": {
+    "start": "node scripts/serve.mjs",
+    "check": "node scripts/check.mjs",
+    "build": "node scripts/build.mjs",
+    "test": "npm run check && npm run build"
+  }
+}
